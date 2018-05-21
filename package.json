@@ -1,0 +1,20 @@
+{
+  "name": "cognitoUserSample",
+  "version": "1.0.0",
+  "directories": {
+    "test": "test"
+  },
+  "author": "thomas.kang@hrx.ai",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.234.1",
+    "amazon-cognito-js": "^1.1.0",
+    "node-fetch": "^2.1.2",
+    "prompt": "^1.0.0",
+    "amazon-cognito-identity-js": "^2.0.6",
+    "webpack-zip-files-plugin": "^1.0.0"
+  }
+}
