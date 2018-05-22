@@ -1,12 +1,12 @@
 global.fetch = require("node-fetch");
 const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 const prompt = require("prompt");
-
+//user pool data
 const poolData = {
   UserPoolId: "us-east-1_OjQeZ0WlS",
   ClientId: "4nup9t7ihvk8p4vi7lnuim88oa"
 };
-
+//username and password
 let authenticationData = {
   Username: "178693272@qq.com",
   Password: "P@ssw0rd"
@@ -14,22 +14,24 @@ let authenticationData = {
 let authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
   authenticationData
 );
-
+//get user pool object
 let userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 let userData = {
   Username: "178693272@qq.com",
   Pool: userPool
 };
+//get the user object
 let cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-
+// begin login
 cognitoUser.authenticateUser(authenticationDetails, {
   onSuccess: function(result) {
     console.log("authentication successful!");
 
-    // verified phone number
+    // check the verified phone number ,we should verfied phoneNumber if did not
     if (!result.idToken.payload.phone_number_verified) {
       //require  phone_number verified
       var attributeList = [];
+      // 1.phone_number
       var phone_numberAttr = {
         Name: "phone_number",
         Value: "+8613880030715"
@@ -38,7 +40,7 @@ cognitoUser.authenticateUser(authenticationDetails, {
         phone_numberAttr
       );
       attributeList.push(attribute);
-
+      
       cognitoUser.updateAttributes(attributeList, function(err, result) {
         if (err) {
           console.log(err.message || JSON.stringify(err));
